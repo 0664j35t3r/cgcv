@@ -1,0 +1,1 @@
+/usr/bin/c++    -std=c++11 -g    CMakeFiles/cgtask1a.dir/RayTracer1a.cpp.o CMakeFiles/cgtask1a.dir/Scene1a.cpp.o CMakeFiles/cgtask1a.dir/task1a.cpp.o  -o cgtask1a -rdynamic ../common/cg1framework/libcg1framework.a ../common/libcgcommon.a ../../cgcvcommon/libcgcvcommon.a ../../cgcvcommon/tinyxml/libtinyxml.a -lz -lpng -lz -lpng 

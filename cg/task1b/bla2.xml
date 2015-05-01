@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<config>
+	<testcase name="bla2">
+		<width>640</width>
+		<height>480</height>
+		<output>bla2</output>
+		<max_bounce value="1" />
+		<output_intermediates value="1" />
+		<camera>
+			<eye>1.4 1.4 2.2</eye>
+			<lookat>-0.15 -0.4 0</lookat>
+			<up>0 1 0</up>
+			<f value="0.1" />
+			<beta value="64" />
+		</camera>
+		<scene>
+			<background>0 0 0</background>
+			<pointlight>
+				<position>1.6 1.4 2.2</position>
+				<color>1 1 1</color>
+			</pointlight>
+			<material name="cube">
+				<texture>data/logo_small.png</texture>
+			</material>
+			<object src="data/cube.obj" />
+		</scene>
+	</testcase>
+</config>

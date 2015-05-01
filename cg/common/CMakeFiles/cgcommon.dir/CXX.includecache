@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/jester/NetBeansProjects/cgcv/cg/common/cgmath.h
+cmath
+-
+algorithm
+-
+
+/home/jester/NetBeansProjects/cgcv/cg/common/color.h
+vector.h
+/home/jester/NetBeansProjects/cgcv/cg/common/vector.h
+
+/home/jester/NetBeansProjects/cgcv/cg/common/surface.cpp
+string
+-
+stdexcept
+-
+cstdio
+-
+png.h
+/home/jester/NetBeansProjects/cgcv/cg/common/png.h
+surface.h
+/home/jester/NetBeansProjects/cgcv/cg/common/surface.h
+
+/home/jester/NetBeansProjects/cgcv/cg/common/surface.h
+algorithm
+-
+cassert
+-
+color.h
+/home/jester/NetBeansProjects/cgcv/cg/common/color.h
+
+/home/jester/NetBeansProjects/cgcv/cg/common/vector.h
+cgmath.h
+/home/jester/NetBeansProjects/cgcv/cg/common/cgmath.h
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<config>
+	<testcase name="cube">
+		<width>800</width>
+		<height>600</height>
+		<output>cube</output>
+		<camera>
+			<eye>7.4811,-6,5.3</eye>
+			<lookat>0,0.2,0</lookat>
+			<up>0,1,0</up>
+			<f value="0.1" />
+			<beta value="20" />
+		</camera>
+		<viewBox>9,12</viewBox>
+		<scene>
+			<object src="data/cube.obj" />
+		</scene>
+	</testcase>
+</config>

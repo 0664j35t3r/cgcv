@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<config>
+	<testcase name="vader">
+		<width>800</width>
+		<height>600</height>
+		<output>vader</output>
+		<camera>
+			<eye>-3,2,12</eye>
+			<lookat>0,0,0</lookat>
+			<up>0,1,0</up>
+			<f value="1" />
+			<beta value="45" />
+		</camera>
+		<viewBox>10,19</viewBox>
+		<scene>
+			<object src="data/vader.obj" />
+		</scene>
+	</testcase>
+</config>

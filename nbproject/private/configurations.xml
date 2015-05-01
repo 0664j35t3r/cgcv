@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="95">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name="cg">
+        <df name="CMakeFiles">
+        </df>
+        <df name="common">
+          <df name="cg1framework">
+            <df name="CMakeFiles">
+              <df name="cg1framework.dir">
+              </df>
+            </df>
+            <in>BVHNode.cpp</in>
+            <in>BVHNode.h</in>
+            <in>BVHTree.cpp</in>
+            <in>BVHTree.h</in>
+            <in>BoundingBox.cpp</in>
+            <in>BoundingBox.h</in>
+            <in>Ray.h</in>
+            <in>RayTracer.cpp</in>
+            <in>RayTracer.h</in>
+            <in>Scene.cpp</in>
+            <in>Scene.h</in>
+            <in>Triangle.cpp</in>
+            <in>Triangle.h</in>
+            <in>config_utils.h</in>
+            <in>main.cpp</in>
+            <in>scene_builder.cpp</in>
+            <in>scene_builder.h</in>
+          </df>
+          <df name="CMakeFiles">
+            <df name="cgcommon.dir">
+            </df>
+          </df>
+          <in>cgmath.h</in>
+          <in>color.h</in>
+          <in>formats.h</in>
+          <in>matrix.h</in>
+          <in>surface.cpp</in>
+          <in>surface.h</in>
+          <in>vector.h</in>
+        </df>
+        <df name="task1a">
+          <df name="CMakeFiles">
+            <df name="cgtask1a.dir">
+            </df>
+            <df name="submit.dir">
+            </df>
+          </df>
+          <df name="data">
+          </df>
+          <df name="output">
+          </df>
+          <in>RayTracer1a.cpp</in>
+          <in>RayTracer1a.h</in>
+          <in>Scene1a.cpp</in>
+          <in>Scene1a.h</in>
+          <in>task1a.cpp</in>
+        </df>
+        <df name="task1b">
+          <df name="CMakeFiles">
+            <df name="cgtask1b.dir">
+            </df>
+            <df name="submit.dir">
+            </df>
+          </df>
+          <df name="data">
+          </df>
+          <df name="output">
+          </df>
+          <in>RayTracer1b.cpp</in>
+          <in>RayTracer1b.h</in>
+          <in>Scene1b.cpp</in>
+          <in>Scene1b.h</in>
+          <in>task1b.cpp</in>
+        </df>
+      </df>
+      <df name="cgcvcommon">
+        <df name="CMakeFiles">
+          <df name="cgcvcommon.dir">
+          </df>
+        </df>
+        <df name="lpng158">
+          <in>example.c</in>
+          <in>png.c</in>
+          <in>png.h</in>
+          <in>pngconf.h</in>
+          <in>pngdebug.h</in>
+          <in>pngerror.c</in>
+          <in>pngget.c</in>
+          <in>pnginfo.h</in>
+          <in>pnglibconf.h</in>
+          <in>pngmem.c</in>
+          <in>pngpread.c</in>
+          <in>pngpriv.h</in>
+          <in>pngread.c</in>
+          <in>pngrio.c</in>
+          <in>pngrtran.c</in>
+          <in>pngrutil.c</in>
+          <in>pngset.c</in>
+          <in>pngstruct.h</in>
+          <in>pngtest.c</in>
+          <in>pngtrans.c</in>
+          <in>pngwio.c</in>
+          <in>pngwrite.c</in>
+          <in>pngwtran.c</in>
+          <in>pngwutil.c</in>
+        </df>
+        <df name="tinyxml">
+          <df name="CMakeFiles">
+            <df name="tinyxml.dir">
+            </df>
+          </df>
+          <in>tinystr.cpp</in>
+          <in>tinystr.h</in>
+          <in>tinyxml.cpp</in>
+          <in>tinyxml.h</in>
+          <in>tinyxmlerror.cpp</in>
+          <in>tinyxmlparser.cpp</in>
+        </df>
+        <df name="zlib-1.2.6">
+          <in>adler32.c</in>
+          <in>compress.c</in>
+          <in>crc32.c</in>
+          <in>crc32.h</in>
+          <in>deflate.c</in>
+          <in>deflate.h</in>
+          <in>example.c</in>
+          <in>gzclose.c</in>
+          <in>gzguts.h</in>
+          <in>gzlib.c</in>
+          <in>gzread.c</in>
+          <in>gzwrite.c</in>
+          <in>infback.c</in>
+          <in>inffast.c</in>
+          <in>inffast.h</in>
+          <in>inffixed.h</in>
+          <in>inflate.c</in>
+          <in>inflate.h</in>
+          <in>inftrees.c</in>
+          <in>inftrees.h</in>
+          <in>trees.c</in>
+          <in>trees.h</in>
+          <in>uncompr.c</in>
+          <in>zconf.h</in>
+          <in>zlib.h</in>
+          <in>zutil.c</in>
+          <in>zutil.h</in>
+        </df>
+        <in>cfg_config.cpp</in>
+        <in>cfg_config.h</in>
+        <in>cfg_container.cpp</in>
+        <in>cfg_container.h</in>
+        <in>cfg_conversion.h</in>
+        <in>cfg_testcase.h</in>
+        <in>interface.h</in>
+      </df>
+      <df name="CMakeFiles">
+        <df name="2.8.12.2">
+          <df name="CompilerIdC">
+            <in>CMakeCCompilerId.c</in>
+          </df>
+          <df name="CompilerIdCXX">
+            <in>CMakeCXXCompilerId.cpp</in>
+          </df>
+        </df>
+        <df name="clean-all.dir">
+        </df>
+        <df name="CMakeTmp">
+        </df>
+      </df>
+      <df name="cv">
+        <df name="CMakeFiles">
+        </df>
+        <df name="task1a">
+          <df name="CMakeFiles">
+            <df name="cvtask1a.dir">
+            </df>
+            <df name="submit.dir">
+            </df>
+          </df>
+          <df name="data">
+          </df>
+          <df name="output">
+          </df>
+          <in>main.cpp</in>
+        </df>
+        <df name="task1b">
+          <df name="CMakeFiles">
+            <df name="cvtask1b.dir">
+            </df>
+            <df name="submit.dir">
+            </df>
+          </df>
+          <df name="data">
+            <df name="common">
+            </df>
+            <df name="inffeld">
+            </df>
+            <df name="mario">
+            </df>
+            <df name="startrek">
+            </df>
+          </df>
+          <df name="output">
+            <df name="inffeld">
+            </df>
+            <df name="mario">
+            </df>
+            <df name="startrek">
+            </df>
+          </df>
+          <in>main.cpp</in>
+        </df>
+      </df>
+    </df>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <compile>
+        <compiledirpicklist>
+          <compiledirpicklistitem>.</compiledirpicklistitem>
+          <compiledirpicklistitem>${AUTO_FOLDER}</compiledirpicklistitem>
+        </compiledirpicklist>
+        <compiledir>${AUTO_FOLDER}</compiledir>
+        <compilecommandpicklist>
+          <compilecommandpicklistitem>${MAKE} ${ITEM_NAME}.o</compilecommandpicklistitem>
+          <compilecommandpicklistitem>${AUTO_COMPILE}</compilecommandpicklistitem>
+        </compilecommandpicklist>
+        <compilecommand>${AUTO_COMPILE}</compilecommand>
+      </compile>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+            <option name="debug_dir" value="/home/jester/NetBeansProjects/cgcv/."/>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" "${OUTPUT_PATH}mario.xml"</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" </runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" mario.xml</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}" mario.xml</runcommand>
+        <rundir>.</rundir>
+        <buildfirst>false</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+  </confs>
+</configurationDescriptor>

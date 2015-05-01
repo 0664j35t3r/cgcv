@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<config>
+    <testcase name="herman_comicification">
+
+  <!------------------------
+          Input data
+    ----------------------->
+
+        <input value="./data/herman.png" />
+        <lut value="./data/lut_herman.txt" />
+
+  <!-------------------------------
+          Algorithm parameters
+    ------------------------------>
+
+        <clustercounts value="9" />
+        <attempts value="14" />
+        <termcrit_iter value="100" />
+        <termcrit_eps value="1.0" />
+        <diameter value="7" />
+        <sigmacolor value="150" />
+        <sigmaspace value="150" />
+
+        <threshold1 value="180" />
+        <threshold2 value="300" />
+        <aperture_size value="3" />
+        <morph_iter value="1" />
+
+  <!------------------------
+          Output data
+    ----------------------->
+
+        <outputcomic value="./output/herman_colors.png" />
+        <outputedge value="./output/herman_edge.png" />
+        <outputrgb value="./output/herman_final.png" />
+
+    </testcase>
+</config>
+

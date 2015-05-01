@@ -1,0 +1,10 @@
+/home/jester/NetBeansProjects/cgcv/cg/common/cg1framework/CMakeFiles/cg1framework.dir
+/home/jester/NetBeansProjects/cgcv/cg/common/CMakeFiles/cgcommon.dir
+/home/jester/NetBeansProjects/cgcv/cgcvcommon/CMakeFiles/cgcvcommon.dir
+/home/jester/NetBeansProjects/cgcv/cg/task1a/CMakeFiles/cgtask1a.dir
+/home/jester/NetBeansProjects/cgcv/cg/task1b/CMakeFiles/cgtask1b.dir
+/home/jester/NetBeansProjects/cgcv/CMakeFiles/clean-all.dir
+/home/jester/NetBeansProjects/cgcv/cv/task1a/CMakeFiles/cvtask1a.dir
+/home/jester/NetBeansProjects/cgcv/cv/task1b/CMakeFiles/cvtask1b.dir
+/home/jester/NetBeansProjects/cgcv/cv/task1b/CMakeFiles/submit.dir
+/home/jester/NetBeansProjects/cgcv/cgcvcommon/tinyxml/CMakeFiles/tinyxml.dir

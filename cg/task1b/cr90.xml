@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<config>
+	<testcase name="cr90">
+		<width>1920</width>
+		<height>1080</height>
+		<output>cr90</output>
+		<output_intermediates value="1" />
+		<camera>
+			<eye>60 30 30</eye>
+			<lookat>0 0 0</lookat>
+			<up>0 1 0</up>
+			<f value="1" />
+			<beta value="60" />
+		</camera>
+		<image_plane>
+			<a>-1.4859 0.11831 0.404002</a>
+			<b>60 30 30</b>
+			<c>0.000478146 0 -0.000956292</c>
+			<d>0.000390405 -0.000976012 0.000195202</d>
+		</image_plane>
+		<scene>
+			<background>0.3 0.3 0.3</background>
+			<pointlight>
+				<position>1000 800 -300</position>
+				<color>1.0  1.0  1.0</color>
+			</pointlight>
+			<pointlight>
+				<position>-600 400 800</position>
+				<color>0.1  0.5  0.6</color>
+			</pointlight>
+			<pointlight>
+				<position>600 300 300</position>
+				<color>0.3 0.2 0.1</color>
+			</pointlight>
+			<material name="cr90">
+				<k_d>0.8  0.8  0.8</k_d>
+				<texture>./data/cr90_D.png</texture>
+			</material>
+			<object src="data/cr90.obj" />
+		</scene>
+	</testcase>
+</config>

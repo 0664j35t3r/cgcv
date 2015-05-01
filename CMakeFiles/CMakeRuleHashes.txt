@@ -1,0 +1,6 @@
+# Hashes of file build rules.
+f1915eb9edb344721ae1831ba661b5c4 CMakeFiles/clean-all
+89094913deec26d113a29aa4ba8b8056 cg/task1a/CMakeFiles/submit
+3a625fb8a8a72eb04d7fc08ba0b345f5 cg/task1b/CMakeFiles/submit
+cdb57a50b0d9abe350c9714d726e5a66 cv/task1a/CMakeFiles/submit
+698e21086d89e06ec1e281272310bdc3 cv/task1b/CMakeFiles/submit

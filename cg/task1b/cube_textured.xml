@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<config>
+	<testcase name="cube_textured">
+		<width>800</width>
+		<height>600</height>
+		<output>cube_textured</output>
+		<output_intermediates value="1" />
+		<camera>
+			<eye>7.4811 -6 5.3</eye>
+			<lookat>0 0.2 0</lookat>
+			<up>0 1 0</up>
+			<f value="0.1" />
+			<beta value="20" />
+		</camera>
+		<image_plane>
+			<a>-0.0731206 0.0706002 -0.0230261</a>
+			<b>7.4811 -6 5.3</b>
+			<c>3.39771e-005 0 -4.79597e-005</c>
+			<d>-2.68662e-005 -4.8688e-005 -1.90334e-005</d>
+		</image_plane>
+		<scene>
+			<pointlight>
+				<position>7.4811 -6 5.3</position>
+				<color>1.0 1.0 1.0</color>
+			</pointlight>
+			<material name="cube">
+				<texture>./data/cube.png</texture>
+			</material>
+			<object src="data/cube.obj" />
+		</scene>
+	</testcase>
+</config>

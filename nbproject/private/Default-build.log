@@ -1,0 +1,47 @@
+Scanning dependencies of target cgcvcommon
+[  4%] Building CXX object cgcvcommon/CMakeFiles/cgcvcommon.dir/cfg_config.cpp.o
+[  8%] Building CXX object cgcvcommon/CMakeFiles/cgcvcommon.dir/cfg_container.cpp.o
+Linking CXX static library libcgcvcommon.a
+[  8%] Built target cgcvcommon
+Scanning dependencies of target tinyxml
+[ 13%] Building CXX object cgcvcommon/tinyxml/CMakeFiles/tinyxml.dir/tinyxml.cpp.o
+[ 17%] Building CXX object cgcvcommon/tinyxml/CMakeFiles/tinyxml.dir/tinyxmlerror.cpp.o
+[ 21%] Building CXX object cgcvcommon/tinyxml/CMakeFiles/tinyxml.dir/tinyxmlparser.cpp.o
+[ 26%] Building CXX object cgcvcommon/tinyxml/CMakeFiles/tinyxml.dir/tinystr.cpp.o
+Linking CXX static library libtinyxml.a
+[ 26%] Built target tinyxml
+Scanning dependencies of target cgcommon
+[ 30%] Building CXX object cg/common/CMakeFiles/cgcommon.dir/surface.cpp.o
+Linking CXX static library libcgcommon.a
+[ 30%] Built target cgcommon
+Scanning dependencies of target cg1framework
+[ 34%] Building CXX object cg/common/cg1framework/CMakeFiles/cg1framework.dir/Triangle.cpp.o
+[ 39%] Building CXX object cg/common/cg1framework/CMakeFiles/cg1framework.dir/BVHTree.cpp.o
+[ 43%] Building CXX object cg/common/cg1framework/CMakeFiles/cg1framework.dir/BoundingBox.cpp.o
+[ 47%] Building CXX object cg/common/cg1framework/CMakeFiles/cg1framework.dir/main.cpp.o
+[ 52%] Building CXX object cg/common/cg1framework/CMakeFiles/cg1framework.dir/scene_builder.cpp.o
+[ 56%] Building CXX object cg/common/cg1framework/CMakeFiles/cg1framework.dir/RayTracer.cpp.o
+[ 60%] Building CXX object cg/common/cg1framework/CMakeFiles/cg1framework.dir/BVHNode.cpp.o
+[ 65%] Building CXX object cg/common/cg1framework/CMakeFiles/cg1framework.dir/Scene.cpp.o
+Linking CXX static library libcg1framework.a
+[ 65%] Built target cg1framework
+Scanning dependencies of target cgtask1a
+[ 69%] Building CXX object cg/task1a/CMakeFiles/cgtask1a.dir/RayTracer1a.cpp.o
+[ 73%] Building CXX object cg/task1a/CMakeFiles/cgtask1a.dir/Scene1a.cpp.o
+[ 78%] Building CXX object cg/task1a/CMakeFiles/cgtask1a.dir/task1a.cpp.o
+Linking CXX executable cgtask1a
+[ 78%] Built target cgtask1a
+Scanning dependencies of target cgtask1b
+[ 82%] Building CXX object cg/task1b/CMakeFiles/cgtask1b.dir/Scene1b.cpp.o
+[ 86%] Building CXX object cg/task1b/CMakeFiles/cgtask1b.dir/RayTracer1b.cpp.o
+[ 91%] Building CXX object cg/task1b/CMakeFiles/cgtask1b.dir/task1b.cpp.o
+Linking CXX executable cgtask1b
+[ 91%] Built target cgtask1b
+Scanning dependencies of target cvtask1a
+[ 95%] Building CXX object cv/task1a/CMakeFiles/cvtask1a.dir/main.cpp.o
+Linking CXX executable cvtask1a
+[ 95%] Built target cvtask1a
+Scanning dependencies of target cvtask1b
+[100%] Building CXX object cv/task1b/CMakeFiles/cvtask1b.dir/main.cpp.o
+Linking CXX executable cvtask1b
+[100%] Built target cvtask1b

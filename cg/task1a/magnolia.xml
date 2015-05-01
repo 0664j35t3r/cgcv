@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<config>
+	<testcase name="magnolia">
+		<width>512</width>
+		<height>512</height>
+		<output>magnolia</output>
+		<camera>
+			<eye>0,90,60</eye>
+			<lookat>0,-40,0.0</lookat>
+			<up>1,1,0</up>
+			<f value="0.1" />
+			<beta value="80" />
+		</camera>
+		<viewBox>90,200</viewBox>
+		<scene>
+			<object src = "data/magnolia.obj" />
+		</scene>
+	</testcase>
+</config>

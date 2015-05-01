@@ -1,0 +1,2 @@
+/usr/bin/ar cr libcg1framework.a  CMakeFiles/cg1framework.dir/Triangle.cpp.o CMakeFiles/cg1framework.dir/BVHTree.cpp.o CMakeFiles/cg1framework.dir/BoundingBox.cpp.o CMakeFiles/cg1framework.dir/main.cpp.o CMakeFiles/cg1framework.dir/scene_builder.cpp.o CMakeFiles/cg1framework.dir/RayTracer.cpp.o CMakeFiles/cg1framework.dir/BVHNode.cpp.o CMakeFiles/cg1framework.dir/Scene.cpp.o
+/usr/bin/ranlib libcg1framework.a

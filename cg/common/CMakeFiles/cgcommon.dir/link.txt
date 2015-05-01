@@ -1,0 +1,2 @@
+/usr/bin/ar cr libcgcommon.a  CMakeFiles/cgcommon.dir/surface.cpp.o
+/usr/bin/ranlib libcgcommon.a

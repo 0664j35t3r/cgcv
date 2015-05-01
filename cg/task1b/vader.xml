@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<config>
+	<testcase name="vader">
+		<width>800</width>
+		<height>600</height>
+		<output>vader</output>
+		<output_intermediates value="1" />
+		<camera>
+			<eye>3 2 9</eye>
+			<lookat>0 0 0</lookat>
+			<up>0 1 0</up>
+			<f value="1" />
+			<beta value="45" />
+		</camera>
+		<image_plane>
+			<a>-0.85969 0.198345 -0.834775</a>
+			<b>3 2 9</b>
+			<c>0.00130986 0 -0.000436619</c>
+			<d>9.00677e-005 -0.00135102 0.000270203</d>
+		</image_plane>
+		<scene>
+			<background>0.3 0.3 0.3</background>
+			<pointlight>
+				<position>-4 5 9</position>
+				<color>0.2 0.2 1.0</color>
+			</pointlight>
+			<pointlight>
+				<position>4 5 9</position>
+				<color>1.0 0.2 0.2</color>
+			</pointlight>
+			<pointlight>
+				<position>0 5 9</position>
+				<color>0.2 1.0 0.2</color>
+			</pointlight>
+			<material name="vader">
+				<shininess>25</shininess>
+				<k_s>0.7 0.7 1</k_s>
+				<texture>./data/vader.png</texture>
+			</material>
+			<object src="data/vader.obj" />
+		</scene>
+	</testcase>
+</config>

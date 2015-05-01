@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+<config>
+	<testcase name="reflecting_sphere">
+		<width>1024</width>
+		<height>1024</height>
+		<output>reflecting_sphere</output>
+		<max_bounce value="1" />
+		<output_intermediates value="1" />
+		<camera>
+			<eye>2 3 6</eye>
+			<lookat>0 2 1</lookat>
+			<up>0 1 0</up>
+			<f value="0.1" />
+			<beta value="60" />
+		</camera>
+		<image_plane>
+			<a>-0.0939791 0.0384518 -0.0796432</a>
+			<b>2 3 6</b>
+			<c>0.000104698 0 -4.18794e-005</c>
+			<d>7.6461e-006 -0.000110868 1.91152e-005</d>
+		</image_plane>
+		<scene>
+			<pointlight>
+				<position>-0.5 3.8 -0.5</position>
+				<color>0.2 0.2 0.2</color>
+			</pointlight>
+			<pointlight>
+				<position>0.5 3.8 -0.5</position>
+				<color>0.2 0.2 0.2</color>
+			</pointlight>
+			<pointlight>
+				<position>-0.5 3.8 0.5</position>
+				<color>0.2 0.2 0.2</color>
+			</pointlight>
+			<pointlight>
+				<position>0.5 3.8 0.5</position>
+				<color>0.2 0.2 0.2</color>
+			</pointlight>
+			<pointlight>
+				<position>0 3.8 0</position>
+				<color>0.2 0.2 0.2</color>
+			</pointlight>
+			<material name="cornell_bottom">
+				<k_d>0.7 0.7 0.7</k_d>
+			</material>
+			<material name="cornell_top">
+				<k_d>0.7 0.7 0.7</k_d>
+			</material>
+			<material name="cornell_left">
+				<texture>./data/logo.png</texture>
+			</material>
+			<material name="cornell_back">
+				<k_d>0.7 0.7 0.7</k_d>
+			</material>
+			<material name="cornell_right">
+				<texture>./data/logo.png</texture>
+			</material>
+			<material name="sphere">
+				<reflection>1</reflection>
+				<k_s>0.7 0.7 0.7</k_s>
+			</material>
+			<object src="data/cornell_box.obj">
+				<transform>
+					2.0 0.0 0.0 0.0
+					0.0 2.0 0.0 0.0
+					0.0 0.0 2.0 0.0
+				</transform>
+			</object>
+			<object src="data/sphere.obj">
+				<transform>
+					1.0 0.0 0.0 0.0
+					0.0 1.0 0.0 1.5
+					0.0 0.0 1.0 0.0
+				</transform>
+			</object>
+		</scene>
+	</testcase>
+</config>

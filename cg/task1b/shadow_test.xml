@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<config>
+	<testcase name="shadow_test">
+		<width>800</width>
+		<height>600</height>
+		<output>shadow_test</output>
+		<output_intermediates value="1" />
+		<camera>
+			<eye>0 3 4</eye>
+			<lookat>0 0 0</lookat>
+			<up>0 1 0</up>
+			<f value="0.1" />
+			<beta value="60" />
+		</camera>
+		<image_plane>
+			<a>-0.0768838 -0.013889 -0.114583</a>
+			<b>0 3 4</b>
+			<c>0.00019245 0 0</c>
+			<d>-0 -0.00015396 0.00011547</d>
+		</image_plane>
+		<scene>
+			<background>0.3 0.3 0.3</background>
+			<pointlight>
+				<position>15 20 -30</position>
+				<color>1.0 1.0 1.0</color>
+			</pointlight>
+			<pointlight>
+				<position>5 5 5</position>
+				<color>0.3 0.3 0.3</color>
+			</pointlight>
+			<material name="tu_black">
+				<shininess>16</shininess>
+				<k_s>0.7 0.7 0.7</k_s>
+				<k_d>0.1 0.1 0.1</k_d>
+			</material>
+			<material name="tu_red">
+				<k_d>0.8 0.0 0.2</k_d>
+			</material>
+			<material name="plane">
+				<k_d>0.6 0.6 0.6</k_d>
+				<k_s>0.0 0.0 0.0</k_s>
+			</material>
+			<object src="data/tu.obj">
+				<transform>
+					-1.0 0.0 0.0 1.0
+					0.0 -1.0 0.0 1.0
+					0.0 0.0 1.0 0.0
+				</transform>
+			</object>
+			<object src="data/plane.obj" />
+		</scene>
+	</testcase>
+</config>

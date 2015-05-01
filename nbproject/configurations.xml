@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="95">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name="cg">
+        <df name="common">
+          <df name="cg1framework">
+            <in>BVHNode.cpp</in>
+            <in>BVHTree.cpp</in>
+            <in>BoundingBox.cpp</in>
+            <in>RayTracer.cpp</in>
+            <in>Scene.cpp</in>
+            <in>Triangle.cpp</in>
+            <in>main.cpp</in>
+            <in>scene_builder.cpp</in>
+          </df>
+          <in>surface.cpp</in>
+        </df>
+        <df name="task1a">
+          <in>RayTracer1a.cpp</in>
+          <in>Scene1a.cpp</in>
+          <in>task1a.cpp</in>
+        </df>
+        <df name="task1b">
+          <in>RayTracer1b.cpp</in>
+          <in>Scene1b.cpp</in>
+          <in>task1b.cpp</in>
+        </df>
+      </df>
+      <df name="cgcvcommon">
+        <df name="lpng158">
+          <in>example.c</in>
+          <in>png.c</in>
+          <in>pngerror.c</in>
+          <in>pngget.c</in>
+          <in>pngmem.c</in>
+          <in>pngpread.c</in>
+          <in>pngread.c</in>
+          <in>pngrio.c</in>
+          <in>pngrtran.c</in>
+          <in>pngrutil.c</in>
+          <in>pngset.c</in>
+          <in>pngtest.c</in>
+          <in>pngtrans.c</in>
+          <in>pngwio.c</in>
+          <in>pngwrite.c</in>
+          <in>pngwtran.c</in>
+          <in>pngwutil.c</in>
+        </df>
+        <df name="tinyxml">
+          <in>tinystr.cpp</in>
+          <in>tinyxml.cpp</in>
+          <in>tinyxmlerror.cpp</in>
+          <in>tinyxmlparser.cpp</in>
+        </df>
+        <df name="zlib-1.2.6">
+          <in>adler32.c</in>
+          <in>compress.c</in>
+          <in>crc32.c</in>
+          <in>deflate.c</in>
+          <in>example.c</in>
+          <in>gzclose.c</in>
+          <in>gzlib.c</in>
+          <in>gzread.c</in>
+          <in>gzwrite.c</in>
+          <in>infback.c</in>
+          <in>inffast.c</in>
+          <in>inflate.c</in>
+          <in>inftrees.c</in>
+          <in>trees.c</in>
+          <in>uncompr.c</in>
+          <in>zutil.c</in>
+        </df>
+        <in>cfg_config.cpp</in>
+        <in>cfg_container.cpp</in>
+      </df>
+      <df name="cv">
+        <df name="task1a">
+          <in>main.cpp</in>
+        </df>
+        <df name="task1b">
+          <in>main.cpp</in>
+        </df>
+      </df>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+      <itemPath>configure</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <flagsDictionary>
+        <element flagsID="0" commonFlags="-std=c++11"/>
+      </flagsDictionary>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
+          <executablePath>cv/task1b/cvtask1b</executablePath>
+          <ccTool>
+            <preprocessorList>
+              <Elem>FULL_VERSION=1</Elem>
+              <Elem>TIXML_USE_STL</Elem>
+            </preprocessorList>
+          </ccTool>
+        </makeTool>
+      </makefileType>
+      <item path="cg/common/cg1framework/BVHNode.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="cg/common/cg1framework/BVHTree.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="cg/common/cg1framework/BoundingBox.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="cg/common/cg1framework/RayTracer.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="cg/common/cg1framework/Scene.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="cg/common/cg1framework/Triangle.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="cg/common/cg1framework/main.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="cg/common/cg1framework/scene_builder.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="cg/common/surface.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="cg/task1a/RayTracer1a.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="cg/task1a/Scene1a.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="cg/task1a/task1a.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="cg/task1b/RayTracer1b.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="cg/task1b/Scene1b.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="cg/task1b/task1b.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="cgcvcommon/cfg_config.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+          <incDir>
+            <pElem>cgcvcommon</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="cgcvcommon/cfg_container.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+          <incDir>
+            <pElem>cgcvcommon</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="cgcvcommon/lpng158/example.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/lpng158/png.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/lpng158/pngerror.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/lpng158/pngget.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/lpng158/pngmem.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/lpng158/pngpread.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/lpng158/pngread.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/lpng158/pngrio.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/lpng158/pngrtran.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/lpng158/pngrutil.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/lpng158/pngset.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/lpng158/pngtest.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/lpng158/pngtrans.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/lpng158/pngwio.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/lpng158/pngwrite.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/lpng158/pngwtran.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/lpng158/pngwutil.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/tinyxml/tinystr.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="cgcvcommon/tinyxml/tinyxml.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="cgcvcommon/tinyxml/tinyxmlerror.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="cgcvcommon/tinyxml/tinyxmlparser.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="cgcvcommon/zlib-1.2.6/adler32.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/zlib-1.2.6/compress.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/zlib-1.2.6/crc32.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/zlib-1.2.6/deflate.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/zlib-1.2.6/example.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/zlib-1.2.6/gzclose.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/zlib-1.2.6/gzlib.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/zlib-1.2.6/gzread.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/zlib-1.2.6/gzwrite.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/zlib-1.2.6/infback.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/zlib-1.2.6/inffast.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/zlib-1.2.6/inflate.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/zlib-1.2.6/inftrees.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/zlib-1.2.6/trees.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/zlib-1.2.6/uncompr.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cgcvcommon/zlib-1.2.6/zutil.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="cv/task1a/main.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="cv/task1b/main.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <folder path="0/cg">
+        <ccTool>
+          <incDir>
+            <pElem>/software/opencv/include</pElem>
+            <pElem>cgcvcommon</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="0/cg/common/cg1framework">
+        <ccTool>
+          <incDir>
+            <pElem>cg/common</pElem>
+            <pElem>cg/common/cg1framework</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="0/cg/task1a">
+        <ccTool>
+          <incDir>
+            <pElem>cg/common</pElem>
+            <pElem>cg/common/cg1framework</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="0/cg/task1b">
+        <ccTool>
+          <incDir>
+            <pElem>cg/common</pElem>
+            <pElem>cg/common/cg1framework</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="0/cv">
+        <ccTool>
+          <incDir>
+            <pElem>/software/opencv/include</pElem>
+            <pElem>/usr/include/opencv</pElem>
+            <pElem>cgcvcommon</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+    </conf>
+  </confs>
+</configurationDescriptor>

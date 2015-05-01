@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<config>
+	<testcase name="xwing_small">
+		<width>800</width>
+		<height>600</height>
+		<output>xwing_small</output>
+		<output_intermediates value="0" />
+		<camera>
+			<eye>28 14 14</eye>
+			<lookat>0 -5 0</lookat>
+			<up>0 1 0</up>
+			<f value="1" />
+			<beta value="60" />
+		</camera>
+		<image_plane>
+			<a>-1.37594 -0.0261117 0.171619</a>
+			<b>28 14 14</b>
+			<c>0.000860663 0 -0.00172133</c>
+			<d>0.000893105 -0.00164519 0.000446552</d>
+		</image_plane>
+		<scene>
+			<background>0.4 0.4 0.4</background>
+			<pointlight>
+				<position>1000 800 -300</position>
+				<color>1.0  1.0  1.0</color>
+			</pointlight>
+			<pointlight>
+				<position>-600 400 800</position>
+				<color>0.1  0.5  0.6</color>
+			</pointlight>
+			<pointlight>
+				<position>600 300 300</position>
+				<color>0.3  0.2  0.1</color>
+			</pointlight>
+			<material name="xwing">
+				<k_d>0.8  0.8  0.8</k_d>
+				<texture>./data/xwing_D.png</texture>
+			</material>
+			<object src="data/xwing.obj" />
+		</scene>
+	</testcase>
+</config>

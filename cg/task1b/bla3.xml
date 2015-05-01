@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<config>
+	<testcase name="bla3">
+		<width>512</width>
+		<height>512</height>
+		<output>bla3</output>
+		<max_bounce value="1" />
+		<output_intermediates value="1" />
+		<camera>
+			<eye>0 2 -0.25</eye>
+			<lookat>0 0 -0.25</lookat>
+			<up>0 0 -1</up>
+			<f value="0.1" />
+			<beta value="60" />
+		</camera>
+		<scene>
+			<background>0.8 0.8 0.8</background>
+			<pointlight>
+				<position>1.6 1.4 2.2</position>
+				<color>1 1 1</color>
+			</pointlight>
+			<material name="tri">
+			</material>
+			<object src="data/tri.obj" />
+		</scene>
+	</testcase>
+</config>

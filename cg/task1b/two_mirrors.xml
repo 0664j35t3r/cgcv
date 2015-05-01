@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<config>
+	<testcase name="two_mirrors">
+		<width>2048</width>
+		<height>2048</height>
+		<output>two_mirrors</output>
+		<max_bounce value="9" />
+		<output_intermediates value="1" />
+		<camera>
+			<eye>0 1 0</eye>
+			<lookat>-1 1 0</lookat>
+			<up>0 1 0</up>
+			<f value="0.1" />
+			<beta value="120" />
+		</camera>
+		<image_plane>
+			<a>-0.1 0.173121 0.173121</a>
+			<b>0 1 0</b>
+			<c>0 0 -0.000169146</c>
+			<d>0 -0.000169146 -0</d>
+		</image_plane>
+		<scene>
+			<pointlight>
+				<position>0 1.8 0</position>
+				<color>1.0 1.0 1.0</color>
+			</pointlight>
+			<material name="cornell_bottom">
+				<k_d>0.7 0.7 0.7</k_d>
+			</material>
+			<material name="cornell_top">
+				<k_d>0.0 0.8 0.0</k_d>
+			</material>
+			<material name="cornell_left">
+				<reflection>1</reflection>
+			</material>
+			<material name="cornell_back">
+				<k_d>0.0 0.0 0.8</k_d>
+			</material>
+			<material name="cornell_right">
+				<reflection>1</reflection>
+			</material>
+			<object src="data/cornell_box.obj">
+				<transform>
+					2.0 0.0 0.0 0.0
+					0.0 2.0 0.0 0.0
+					0.0 0.0 2.0 0.0
+				</transform>
+			</object>
+			<object src="data/vader.obj">
+				<transform>
+					-0.2 0.0 0.0 0.0
+					0.0 0.2 0.0 1.0
+					0.0 0.0 -0.2 1.0
+				</transform>
+			</object>
+			<material name="vader">
+				<texture>./data/vader.png</texture>
+			</material>
+		</scene>
+	</testcase>
+</config>
