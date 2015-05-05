@@ -68,11 +68,24 @@
           <df name="data">
           </df>
           <df name="output">
+            <df name="cube_simple">
+            </df>
+            <df name="cube_textured">
+              <df name="New Folder">
+              </df>
+            </df>
+            <df name="cube_textured  1">
+            </df>
+            <df name="shadow_test">
+            </df>
+            <df name="vader">
+            </df>
           </df>
           <in>RayTracer1b.cpp</in>
           <in>RayTracer1b.h</in>
           <in>Scene1b.cpp</in>
           <in>Scene1b.h</in>
+          <in>task1b 1.cpp</in>
           <in>task1b.cpp</in>
         </df>
       </df>
@@ -211,6 +224,7 @@
             <df name="startrek">
             </df>
           </df>
+          <in>main 1.cpp</in>
           <in>main.cpp</in>
         </df>
       </df>
@@ -253,12 +267,12 @@
       </nativedebugger>
       <runprofile version="9">
         <runcommandpicklist>
-          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" "${OUTPUT_PATH}mario.xml"</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" </runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" mario.xml</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}" mario.xml</runcommand>
+        <runcommand>"${OUTPUT_PATH}"</runcommand>
         <rundir>.</rundir>
         <buildfirst>false</buildfirst>
         <terminal-type>0</terminal-type>

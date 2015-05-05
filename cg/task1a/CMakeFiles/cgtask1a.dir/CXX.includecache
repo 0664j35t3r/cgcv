@@ -6,37 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/jester/NetBeansProjects/cgcv/cg/task1a/RayTracer1a.cpp
-iostream
--
-iomanip
--
-sys/stat.h
--
-sys/types.h
--
-sstream
--
-config_utils.h
-/home/jester/NetBeansProjects/cgcv/cg/task1a/config_utils.h
-RayTracer1a.h
-/home/jester/NetBeansProjects/cgcv/cg/task1a/RayTracer1a.h
-Scene1a.h
-/home/jester/NetBeansProjects/cgcv/cg/task1a/Scene1a.h
-direct.h
--
-
 /home/jester/NetBeansProjects/cgcv/cg/task1a/RayTracer1a.h
 string
 -
 RayTracer.h
 /home/jester/NetBeansProjects/cgcv/cg/task1a/RayTracer.h
-Scene1a.h
-/home/jester/NetBeansProjects/cgcv/cg/task1a/Scene1a.h
-
-/home/jester/NetBeansProjects/cgcv/cg/task1a/Scene1a.cpp
-config_utils.h
-/home/jester/NetBeansProjects/cgcv/cg/task1a/config_utils.h
 Scene1a.h
 /home/jester/NetBeansProjects/cgcv/cg/task1a/Scene1a.h
 
@@ -92,26 +66,6 @@ cg/task1a/../common/cg1framework/vector.h
 Ray.h
 cg/task1a/../common/cg1framework/Ray.h
 
-cg/task1a/../common/cg1framework/config_utils.h
-stdexcept
--
-array
--
-vector
--
-fstream
--
-iostream
--
-cfg_config.h
-cg/task1a/../common/cg1framework/cfg_config.h
-cfg_container.h
-cg/task1a/../common/cg1framework/cfg_container.h
-vector.h
-cg/task1a/../common/cg1framework/vector.h
-matrix.h
-cg/task1a/../common/cg1framework/matrix.h
-
 cg/task1a/../common/cg1framework/scene_builder.h
 cfg_container.h
 cg/task1a/../common/cg1framework/cfg_container.h
@@ -150,24 +104,6 @@ cg/task1a/../common/vector.h
 cgmath.h
 cg/task1a/../common/cgmath.h
 
-cgcvcommon/cfg_config.h
-cfg_testcase.h
-cgcvcommon/cfg_testcase.h
-cfg_container.h
-cgcvcommon/cfg_container.h
-limits
--
-string
--
-sstream
--
-iostream
--
-map
--
-vector
--
-
 cgcvcommon/cfg_container.h
 string
 -
@@ -187,10 +123,6 @@ cfg_container.h
 cgcvcommon/cfg_container.h
 vector
 -
-
-cgcvcommon/cfg_testcase.h
-cfg_container.h
-cgcvcommon/cfg_container.h
 
 cgcvcommon/tinyxml/tinystr.h
 assert.h

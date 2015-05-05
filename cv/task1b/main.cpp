@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <ctime>
 #include <vector>
+#include <cmath>
 
 #include "cfg_config.h"
 #include "opencv2/opencv.hpp"
@@ -48,7 +49,6 @@ using namespace cv;
 //==============================================================
 void drawHist( string name, MatND input )
 {
-  cout << "rawHist" << endl;
   int hist_w = 512;
   int hist_h = 400;
   int bin_w = cvRound( ( double )hist_w / input.cols );
@@ -59,7 +59,7 @@ void drawHist( string name, MatND input )
   /// Draw for each channel
   for (int i = 1; i < hist.cols; i++)
   {
-    line( histImage, Point( bin_w * ( i - 1 ), hist_h - cvRound( hist.at<float>( i - 1 ) ) ),
+    line( histImage, Point( bin_w * ( i - 1 ), hist_h - cvRound( hist.at<float>( i - 1 )) ),
       Point( bin_w * ( i ), hist_h - cvRound( hist.at<float>( i ) ) ),
       Scalar( 255, 255, 255 ), 2, 8, 0 );
   }
@@ -79,13 +79,11 @@ void drawHist( string name, MatND input )
 //==============================================================
 Mat getHistogram( const Mat &lab )
 {
-  cout << "getHistogram" << endl;
-  
   Mat hist = Mat::zeros(1, 256, CV_32FC1);
 
-  for (int iter_y = 0; iter_y < lab.rows; iter_y++)
-    for (int iter_x = 0; iter_x < lab.cols; iter_x++)
-       hist.at<double>(lab.at<uchar>(iter_x, iter_y)) += 1.0;
+  for(int iter_y = 0; iter_y < lab.rows; iter_y++)
+    for(int iter_x = 0; iter_x < lab.cols; iter_x++)
+       hist.at<float>( lab.at<uchar>(iter_y, iter_x) )++;
   
   return hist;
 }
@@ -112,95 +110,104 @@ Mat getHistogram( const Mat &lab )
 //      - convert the image back to BGR
 //      - save the image in matched
 //
-//==============================================================
-void matchHistograms( Mat patch_src, Mat patch_dst, Mat &matched )
+//=============================================================
+void calculateCdf(Mat& cdf_zero, Mat& hist)
 {
-  cout << "matchHistogram" << endl;
-  
-  matched = Mat::zeros( matched.size(), CV_8U ); // CV_8U: 0-255
-  // convert the input images to Lab colorspace (cvtColor)
-  cv::cvtColor(patch_src, patch_src, CV_RGB2Lab);
-  cv::cvtColor(patch_dst, patch_dst, CV_RGB2Lab);
-  
-  // split the patch_src and patch_dst in their channels 
-  Mat *channel_src;
-  Mat *channel_dst;
-  split(patch_src, channel_src);
-  split(patch_dst, channel_dst);
-  
-  Mat a_src = getHistogram(channel_src[1]);
-  Mat b_src = getHistogram(channel_src[2]);
-  Mat a_dst = getHistogram(channel_dst[1]);
-  Mat b_dst = getHistogram(channel_dst[2]);
-  
-  
-  // normalize the histograms (NORM_L1)
-  // cv::normalize(src, dst, alpha, beta, NORM_MINMAX, dtype); 
-  cv::normalize(a_src, a_src, 0, 255, NORM_MINMAX); 
-  cv::normalize(b_src, b_src, 0, 255, NORM_MINMAX); 
-  cv::normalize(a_dst, a_dst, 0, 255, NORM_MINMAX); 
-  cv::normalize(b_dst, b_dst, 0, 255, NORM_MINMAX); 
-  
-  // calculate CDF
-  cv::equalizeHist(a_src, a_src);
-  cv::equalizeHist(b_src, b_src);
-  cv::equalizeHist(a_dst, a_dst);
-  cv::equalizeHist(b_dst, b_dst);
-  
-  // map the position of the value of the src_cdf to the positon of the dst_cdf
-  std::vector<double> lut_a;
-  std::vector<double> lut_b;
-  
-  // page 6; i = src, j = dst
-  double minimum = 0;
-  double compare;
-  double tmp_i;
-  double tmp_j;
-  for(int i = 0; i < 256; i++)  
+  float sum_cdf = 0;
+  for (int i_color = 0; i_color < 256; i_color++)
   {
-    tmp_i = a_src.at<double>(i);
-    for(int j = 0; j < 256; j++)
-    {
-      tmp_j = a_dst.at<double>(j);
-      compare = std::abs(tmp_i - tmp_j);
-      if(minimum > compare)
-        minimum = compare;
-    }
-    lut_a.push_back(minimum);
+    //                                                 y , x
+    sum_cdf += hist.at<float>(0, i_color);
+    cdf_zero.at<float>(0, i_color) = sum_cdf;
   }
+}
+
+void calculateLut(vector<uchar>& lut_scr, Mat src_cdf, Mat dst_cdf )
+{
+  int result;
+  float cur_abs;
+  float prev_abs;
   
-  for(int i = 0; i < 256; i++)  
+  for (int i = 0; i < 256; i++)
   {
-    tmp_i = b_src.at<double>(i);
-    for(int j= 0; j < 256; j++)
+    result = 0;
+    prev_abs = abs(dst_cdf.at<float>(i) - src_cdf.at<float>(0));
+    for (int j = 0; j < 256; j++)
     {
-      tmp_j = b_dst.at<double>(j);
-      compare = std::abs(tmp_i - tmp_j);
-      if(minimum > compare)
-        minimum = compare;
+      cur_abs = abs(dst_cdf.at<float>(i) - src_cdf.at<float>(j));
+      if (prev_abs > cur_abs)
+      {
+        result = j;
+        prev_abs = cur_abs;
+      }
+      else if(prev_abs == cur_abs)
+      {
+        if(abs(result - i) > abs(j - i))
+        {
+          result = j;
+          prev_abs = cur_abs;
+        }
+      }
     }
-    lut_b.push_back(minimum);
+    lut_scr.push_back(result);
   }
+}
+
+void matchHistograms( Mat patch_src, Mat patch_dst, Mat& matched )
+{
+  matched = Mat::zeros( patch_src.size(), CV_32FC1 );
   
+  Mat src_lab = patch_src.clone();
+  Mat dst_lab = patch_dst.clone();
   
-  // with the previous generate LUT replace the values in the
-  // src_channel in the whole image with the values of the LUT
+  cvtColor( src_lab, src_lab, CV_BGR2Lab );
+  cvtColor( dst_lab, dst_lab, CV_BGR2Lab );
+  vector<Mat> channel_src(3);
+  vector<Mat> channel_dst(3);
+  split( src_lab, channel_src );
+  split( dst_lab, channel_dst );
+  
+  Mat src_hist_a = getHistogram( channel_src[1] );
+  Mat src_hist_b = getHistogram( channel_src[2] );
+  Mat dst_hist_a = getHistogram( channel_dst[1] );
+  Mat dst_hist_b = getHistogram( channel_dst[2] );
+  
+  normalize(src_hist_a, src_hist_a, 1, 256, NORM_L1);
+  normalize(src_hist_b, src_hist_b, 1, 256, NORM_L1);
+  normalize(dst_hist_a, dst_hist_a, 1, 256, NORM_L1);
+  normalize(dst_hist_b, dst_hist_b, 1, 256, NORM_L1);
+  
+  // calculate cdf
+  Mat src_cdf_a = Mat::zeros( 1, 256, CV_32FC1 );
+  Mat src_cdf_b = Mat::zeros( 1, 256, CV_32FC1 );
+  Mat dst_cdf_a = Mat::zeros( 1, 256, CV_32FC1 );
+  Mat dst_cdf_b = Mat::zeros( 1, 256, CV_32FC1 );
+  
+  calculateCdf(src_cdf_a, src_hist_a);
+  calculateCdf(dst_cdf_a, dst_hist_a);
+  calculateCdf(src_cdf_b, src_hist_b);
+  calculateCdf(dst_cdf_b, dst_hist_b);
+
+  // calculate lut
+  vector<uchar> lut_scr_a;
+  vector<uchar> lut_scr_b;
+  calculateLut(lut_scr_a, src_cdf_a, dst_cdf_a);
+  calculateLut(lut_scr_b, src_cdf_b, dst_cdf_b);
+  
+  // write it in every patch
   for (int y = 0; y < patch_src.rows; y++)
   {
     for (int x = 0; x < patch_src.cols; x++)
     {
-      channel_src[1].at<uchar>(x, y) = lut_a[channel_src[1].at<uchar>(x, y)];
-      channel_src[2].at<uchar>(x, y) = lut_b[channel_src[2].at<uchar>(x, y)];
+      channel_dst[1].at<uchar>(y, x) = lut_scr_a[channel_dst[1].at<uchar>(y, x)];
+      channel_dst[2].at<uchar>(y, x) = lut_scr_b[channel_dst[2].at<uchar>(y, x)];
     }
   }
   
-  // merge
-  merge(channel_src, 3, patch_src);
-  merge(channel_dst, 3, patch_dst);
-  
-  // convert image back to bgr
-  cv::cvtColor(patch_src, patch_src, CV_Lab2BGR);
+  merge( channel_dst, matched );
+  cv::cvtColor( matched, matched, CV_Lab2BGR );
 }
+
 
 //==============================================================
 // getPatches(const Mat &image, vector<Mat> &patches, unsigned int patch_size)
@@ -217,9 +224,6 @@ void matchHistograms( Mat patch_src, Mat patch_dst, Mat &matched )
 
 void getPatches( const Mat &image, vector<Mat> &patches, const unsigned int patch_size )
 {   
-  cout << "get patches" << endl;
-  
-  int count = 1;
   // create one new patch
   Mat tmp = Mat::zeros( patch_size, patch_size, CV_32FC1 );
 
@@ -230,14 +234,9 @@ void getPatches( const Mat &image, vector<Mat> &patches, const unsigned int patc
     {
       tmp = image.colRange(x, x + patch_size).rowRange(y, y + patch_size);
       patches.push_back(tmp);
-      
-      //  cout << "Y: " << y << " X: " << x << endl;
     }
-    cout << count++ << endl;
   } 
-  cout << "final" << endl;
 }     
-
 
 //==============================================================
 // setPatches( Mat &image, vector<Mat> &patches, unsigned int patch_size)
@@ -250,30 +249,41 @@ void getPatches( const Mat &image, vector<Mat> &patches, const unsigned int patc
 //	- image: mosaic picture
 //	- patches: vector with the patches
 //	- patch_size: size of the patches (normally 32)
-//================================================================================
+//==============================================================
 void setPatches( Mat &image, vector<Mat> &patches, unsigned int patch_size )
 {
-  cout << "setPatches" << endl;
+  unsigned patch_count = image.rows / patch_size;
   
-  for (unsigned y = 1; y < image.rows - 1; y = y + patch_size)
-    for (unsigned x = 1; x < image.cols - 1; x = x + patch_size)
-      image.at<Vec3f>(x, y) = patches.at(x + y * image.cols / patch_size); // todo durchrechnen!!! 
-}
+  for (int y_patch = 0; y_patch < patch_count; y_patch++)
+  {
+    for (int x_patch = 0; x_patch < patch_count; x_patch++)
+    {
+      for (int y_pixel = 0; y_pixel < patch_size; y_pixel++)
+      {
+        for (int x_pixel = 0; x_pixel < patch_size; x_pixel++)
+        {
+          image.at<Vec3b>(y_patch * patch_size + y_pixel, x_patch * patch_size + x_pixel) = 
+            patches.at(x_patch + y_patch * patch_count).at<Vec3b>(y_pixel, x_pixel);
+        }
+      }
+    }
+  } 
+} 
 
-//================================================================================
+
+//==============================================================
 // retrieveHistogramsFromFile( string file_name )
-//--------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 // TODO:
 //	- Nothing!
 //	- Do not change anything here
-//================================================================================
+//==============================================================
 Mat retrieveHistogramsFromFile( string file_name )
 {
-  cout << "retrieveHistogramsFromFile" << endl;
-  
   Mat returnValue = Mat::zeros( 0, DIMENSIONS, CV_32FC1 );
   Mat mInput = Mat::zeros( 0, DIMENSIONS, CV_32FC1 );
   mInput = imread( file_name );
+  
   for (int iR = 0; iR < mInput.rows; ++iR)
   {
     Mat tmp = mInput.row( iR );
@@ -284,7 +294,7 @@ Mat retrieveHistogramsFromFile( string file_name )
     
     returnValue.push_back( converted );
   }
-  return  returnValue;
+  return returnValue;
 }
 
 int h_hist_max = -INT_MAX;
@@ -293,14 +303,14 @@ int s_hist_max = -INT_MAX;
 int s_hist_min =  INT_MAX;
 int v_hist_max = -INT_MAX;
 int v_hist_min =  INT_MAX;
-int max_idx    = -INT_MAX;
-int min_idx    =  INT_MAX;
+int max_idx =    -INT_MAX;
+int min_idx =     INT_MAX;
 
-float bin_max = 0.0;
+float bin_max = 0.0f;
 
-//================================================================================
+//==============================================================
 // getHSVHistogram(const Mat &hsv)
-//--------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 // TODO:
 //	- calculate the Histogram for all channels of a HSV image:
 //	- look at every pixel and every channel
@@ -313,40 +323,36 @@ float bin_max = 0.0;
 //
 // Parameters:
 // - hsv: one hsv image
-//================================================================================
+//==============================================================
 Mat getHSVHistogram( const Mat &hsv )
 {
-  cout << "getHSVHistogram" << endl;
-  
   Mat hist = Mat::zeros( 1, DIMENSIONS, CV_32FC1 );
   
   // iterate over the orginal image, which will be converted into the HSV space!
-  for (int iter_x = 0; iter_x < hsv.cols; iter_x++)
+  for (int y_pixel = 0; y_pixel < hsv.rows; y_pixel++)
   {
-    for (int iter_y = 0; iter_y < hsv.rows; iter_y++)
+    for (int x_pixel = 0; x_pixel < hsv.cols; x_pixel++)
     {
       // calculate hsv values
-      Vec3f pix = hsv.at<Vec3f>(iter_x,iter_y); 
+      Vec3b pixel = hsv.at<Vec3b>(y_pixel, x_pixel); 
       uchar h = 0;
-      if((pix[0] / 10) < 180)
-      {
-        h = floor(pix[0] / 10);
-      }
-      uchar s = floor(pix[1] / 86);
-      uchar v = floor(pix[2] / 86);
+      if(pixel[0] < 180)
+        h = floor(pixel[0] / 10);
+      
+      uchar s = floor(pixel[1] / 86);
+      uchar v = floor(pixel[2] / 86);
       
       // index(i) = 9h(i)+3s(i)+v(i) increased
-      hist.at<float>(0, 9*h + 3*s + v) += 1.0f;
+      hist.at<float>(0, 9 * h + 3 * s + v)++;
     }
   }
-   
   return hist;
 }
 
-//================================================================================
+//==============================================================
 // main()
 //
-//================================================================================
+//==============================================================
 int main( int argc, char *argv[] )
 {
   printf( "CV/task1b framework version 1.0\n" ); // DO NOT REMOVE THIS LINE!!!
@@ -395,24 +401,18 @@ int main( int argc, char *argv[] )
     //	- save the pictures in mosaic_pieces
     //_______________________________________________________
     vector<Mat> mosaic_pieces;
-    cout << "num images: " << num_images << endl;
-    
-    for(int i = 0; i < num_images; i++)
-    {
-      const std::string mosaic_peaces_name = mosaic_path + to_string(i) + PNG;
-      mosaic_pieces.push_back(imread(mosaic_peaces_name)); // warning 
-      
-      cout << mosaic_peaces_name << endl;
-    }
-
-    Mat mDBHistograms;
-    
     vector<Mat> vecPatches;
+    
+    for(int i_mosaic = 1; i_mosaic <= num_images; i_mosaic++)
+    {
+      const std::string mosaic_peaces_name = mosaic_path + to_string(i_mosaic) + PNG;
+      mosaic_pieces.push_back( imread(mosaic_peaces_name) ); 
+    }
+    
     Mat mQueryImage = imread( input_query_image );
     Size pic = mQueryImage.size();
     int height = (pic.width / mos_size) * (pic.height / mos_size);
 
-    
     //_______________________________________________________
     // TODO:
     //  - read Database Histo from File to mDBHistograms
@@ -423,15 +423,13 @@ int main( int argc, char *argv[] )
     //
     //  Original Picture is stored in mQueryImage 
     //_______________________________________________________
-    mQueryImage = Mat::zeros(mQueryImage.size(), CV_8UC3);
+    Mat mDBHistograms = retrieveHistogramsFromFile( mosaic_histo ); // database_histo
     
-    Mat mInputHistograms = Mat::zeros( 0, DIMENSIONS, CV_32FC1 );
-    mInputHistograms = retrieveHistogramsFromFile(mosaic_histo);
     cvtColor(mQueryImage, mQueryImage, CV_BGR2HSV);
-    
-    
     imwrite( out_01_hsv, mQueryImage );
-
+    
+    getPatches(mQueryImage, vecPatches, mos_size);
+    
     //_______________________________________________________
     // TODO:
     //  - calculate Histo from Patches and
@@ -442,11 +440,13 @@ int main( int argc, char *argv[] )
     //      v
     //      patches
     //_______________________________________________________
-    Mat out_mInputHistograms;
-    out_mInputHistograms = Mat::zeros( height, DIMENSIONS, CV_32FC1 );;
-    imwrite( out_02_hist, out_mInputHistograms );
-    
-    getPatches(mQueryImage, vecPatches, mos_size);
+    Mat mInputHistograms = Mat::zeros( 0 , DIMENSIONS, CV_32FC1 ); 
+    Mat out_mInputHistograms = Mat::zeros( height, DIMENSIONS, CV_32FC1 );
+
+    for(auto &it_patch : vecPatches)
+      mInputHistograms.push_back( getHSVHistogram(it_patch) );
+
+    imwrite( out_02_hist, mInputHistograms );
     
     //_______________________________________________________
     // TODO:
@@ -454,13 +454,20 @@ int main( int argc, char *argv[] )
     //      use the flann lib
     //      for the distance use FLANN_DIST_EUCLIDEAN
     //_______________________________________________________
-    flann::Index flann_index;
-
+    flann::Index flann_index( mDBHistograms, 
+                              cv::flann::KDTreeIndexParams(KDTreeIPara), 
+                              cvflann::FLANN_DIST_EUCLIDEAN );
+    
     vector<Mat> vecPatches_matched;
     vector<Mat> rep_vecPatches_matched;
-    
-    flann_index.build(mInputHistograms, cv::flann::SearchParams(162), cvflann::FLANN_DIST_EUCLIDEAN);
-    
+
+    vector<int> indices;
+    vector<float> dists;
+    for(int i_intialize = 0; i_intialize < 5; i_intialize++)
+    {
+      indices.push_back(0);
+      dists.push_back(0);
+    }
     
     //_______________________________________________________
     // TODO:
@@ -477,9 +484,42 @@ int main( int argc, char *argv[] )
     //_______________________________________________________
     Mat out_final_matched = Mat::zeros( mQueryImage.size(), CV_8UC3 );
     Mat rep_out_final_matched = Mat::zeros( mQueryImage.size(), CV_8UC3 );
-    for(auto &it : vecPatches)
-      flann_index.knnSearch(it, mosaic_pieces, out_final_matched, 5, KDTreeSearchParams);
-    
+    flann::SearchParams search_params(KDTreeSearchParams);
+    Mat match = Mat::zeros( mQueryImage.size(), CV_8UC3 );
+    for(auto &it_patch : vecPatches)
+    {
+      // Source:  http://stackoverflow.com/questions/10336568/how-to-use-opencv-flannindex
+      // query, indices, dists, number of nearest neighbour, params
+      Mat patch = getHSVHistogram(it_patch);
+      flann_index.knnSearch( patch, indices, dists, 5, search_params );
+      
+      // to be sure it is hsv
+      cvtColor(it_patch, it_patch, CV_HSV2BGR);
+      matchHistograms(it_patch, mosaic_pieces.at(indices.front()), match);
+      vecPatches_matched.push_back( match );
+      
+      
+      
+//      vector<int> pic_counter(num_images);
+//      int choose_pic;
+//      for (int i = 0; i < 4; i++)
+//      {
+//        if (pic_counter[indices.at(i)] > pic_counter[indices.at(i + 1)])
+//        {
+//          pic_counter[indices.at(i)]++;
+//          choose_pic = i + 1;
+//        }
+//        else if (pic_counter[indices.at(i)] == pic_counter[indices.at(i + 1)])
+//        {
+//          pic_counter[indices.at(i)]++;
+//          choose_pic = i;
+//        }
+//      }
+      
+      matchHistograms(it_patch, mosaic_pieces.at(indices.front()), match);
+      rep_vecPatches_matched.push_back(match);
+    }
+
     //_______________________________________________________
     // TODO:
     //	- generate final picture with the pics from the
@@ -488,10 +528,12 @@ int main( int argc, char *argv[] )
     //	- BONUS: save the picture for the Bonustask in
     //	  rep_out_final_matched
     //_______________________________________________________
+    setPatches(out_final_matched, vecPatches_matched, mos_size);
+    setPatches(rep_out_final_matched, rep_vecPatches_matched, mos_size);
+    
     imwrite( out_03_final_rep, rep_out_final_matched );
     imwrite( out_04_final, out_final_matched );
   }
-
   catch (exception &ex)
   {
     cout << ex.what() << endl;

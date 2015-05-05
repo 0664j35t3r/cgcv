@@ -6,26 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/jester/NetBeansProjects/cgcv/cg/task1b/RayTracer1b.cpp
-iostream
--
-iomanip
--
-sys/stat.h
--
-sys/types.h
--
-sstream
--
-config_utils.h
-/home/jester/NetBeansProjects/cgcv/cg/task1b/config_utils.h
-RayTracer1b.h
-/home/jester/NetBeansProjects/cgcv/cg/task1b/RayTracer1b.h
-Scene1b.h
-/home/jester/NetBeansProjects/cgcv/cg/task1b/Scene1b.h
-direct.h
--
-
 /home/jester/NetBeansProjects/cgcv/cg/task1b/RayTracer1b.h
 string
 -
@@ -33,16 +13,6 @@ vector
 -
 RayTracer.h
 /home/jester/NetBeansProjects/cgcv/cg/task1b/RayTracer.h
-Scene1b.h
-/home/jester/NetBeansProjects/cgcv/cg/task1b/Scene1b.h
-
-/home/jester/NetBeansProjects/cgcv/cg/task1b/Scene1b.cpp
-iostream
--
-iomanip
--
-fstream
--
 Scene1b.h
 /home/jester/NetBeansProjects/cgcv/cg/task1b/Scene1b.h
 
@@ -61,6 +31,8 @@ unordered_map
 -
 
 /home/jester/NetBeansProjects/cgcv/cg/task1b/task1b.cpp
+complex
+-
 RayTracer1b.h
 /home/jester/NetBeansProjects/cgcv/cg/task1b/RayTracer1b.h
 Scene1b.h
@@ -108,26 +80,6 @@ cg/task1b/../common/cg1framework/vector.h
 Ray.h
 cg/task1b/../common/cg1framework/Ray.h
 
-cg/task1b/../common/cg1framework/config_utils.h
-stdexcept
--
-array
--
-vector
--
-fstream
--
-iostream
--
-cfg_config.h
-cg/task1b/../common/cg1framework/cfg_config.h
-cfg_container.h
-cg/task1b/../common/cg1framework/cfg_container.h
-vector.h
-cg/task1b/../common/cg1framework/vector.h
-matrix.h
-cg/task1b/../common/cg1framework/matrix.h
-
 cg/task1b/../common/cg1framework/scene_builder.h
 cfg_container.h
 cg/task1b/../common/cg1framework/cfg_container.h
@@ -166,24 +118,6 @@ cg/task1b/../common/vector.h
 cgmath.h
 cg/task1b/../common/cgmath.h
 
-cgcvcommon/cfg_config.h
-cfg_testcase.h
-cgcvcommon/cfg_testcase.h
-cfg_container.h
-cgcvcommon/cfg_container.h
-limits
--
-string
--
-sstream
--
-iostream
--
-map
--
-vector
--
-
 cgcvcommon/cfg_container.h
 string
 -
@@ -203,10 +137,6 @@ cfg_container.h
 cgcvcommon/cfg_container.h
 vector
 -
-
-cgcvcommon/cfg_testcase.h
-cfg_container.h
-cgcvcommon/cfg_container.h
 
 cgcvcommon/tinyxml/tinystr.h
 assert.h

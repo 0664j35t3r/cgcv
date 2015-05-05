@@ -21,6 +21,8 @@ ctime
 -
 vector
 -
+cmath
+-
 cfg_config.h
 /home/jester/NetBeansProjects/cgcv/cv/task1b/cfg_config.h
 opencv2/opencv.hpp

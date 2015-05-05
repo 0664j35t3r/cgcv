@@ -81,7 +81,7 @@ void render(const Scene1a& scene, surface<float>& output_image)
       // normal vector for the following function
       ray.direction = normalize(p1 - eye);
       
-      // bool Scene::intersectWithRay(const Triangle*& intersection, float& t, Ray ray) const
+      // bool Scene::intersectWithRay(const Triangle*& intersection, float& t, Ray ray)  const
       if(scene.intersectWithRay(intersectedTriangle, t, ray))
       {
         output_image(pixel_x, pixel_y) = t;
