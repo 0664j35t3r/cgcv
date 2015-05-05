@@ -252,18 +252,19 @@ void getPatches( const Mat &image, vector<Mat> &patches, const unsigned int patc
 //==============================================================
 void setPatches( Mat &image, vector<Mat> &patches, unsigned int patch_size )
 {
-  unsigned patch_count = image.rows / patch_size;
+  unsigned patch_count_y = image.rows / patch_size;
+  unsigned patch_count_x = image.cols / patch_size;
   
-  for (int y_patch = 0; y_patch < patch_count; y_patch++)
+  for (int y_patch = 0; y_patch < patch_count_y; y_patch++)
   {
-    for (int x_patch = 0; x_patch < patch_count; x_patch++)
+    for (int x_patch = 0; x_patch < patch_count_x; x_patch++)
     {
       for (int y_pixel = 0; y_pixel < patch_size; y_pixel++)
       {
         for (int x_pixel = 0; x_pixel < patch_size; x_pixel++)
         {
           image.at<Vec3b>(y_patch * patch_size + y_pixel, x_patch * patch_size + x_pixel) = 
-            patches.at(x_patch + y_patch * patch_count).at<Vec3b>(y_pixel, x_pixel);
+            patches.at(x_patch + y_patch * patch_count_x).at<Vec3b>(y_pixel, x_pixel);
         }
       }
     }
@@ -486,6 +487,7 @@ int main( int argc, char *argv[] )
     Mat rep_out_final_matched = Mat::zeros( mQueryImage.size(), CV_8UC3 );
     flann::SearchParams search_params(KDTreeSearchParams);
     Mat match = Mat::zeros( mQueryImage.size(), CV_8UC3 );
+    deque<int> pic_counter;
     for(auto &it_patch : vecPatches)
     {
       // Source:  http://stackoverflow.com/questions/10336568/how-to-use-opencv-flannindex
@@ -499,24 +501,48 @@ int main( int argc, char *argv[] )
       vecPatches_matched.push_back( match );
       
       
+      // reputation
+      if( !pic_counter.empty() )
+      {
+        if( std::find( pic_counter.begin(), pic_counter.end(), indices.at(0)) == pic_counter.end())
+          pic_counter.push_back( indices.at(0) );
+        if( std::find( pic_counter.begin(), pic_counter.end(), indices.at(1)) == pic_counter.end())
+          pic_counter.push_back( indices.at(1) );
+        if( std::find( pic_counter.begin(), pic_counter.end(), indices.at(2)) == pic_counter.end())
+          pic_counter.push_back( indices.at(2) );
+        if( std::find( pic_counter.begin(), pic_counter.end(), indices.at(3)) == pic_counter.end())
+          pic_counter.push_back( indices.at(3) );
+        if( std::find( pic_counter.begin(), pic_counter.end(), indices.at(4)) == pic_counter.end())
+          pic_counter.push_back( indices.at(4) );
+      }
+      else
+      {
+        pic_counter.push_back(indices.at(0));
+        pic_counter.push_back(indices.at(1));
+        pic_counter.push_back(indices.at(2));
+        pic_counter.push_back(indices.at(3));
+        pic_counter.push_back(indices.at(4));
+      }
       
-//      vector<int> pic_counter(num_images);
-//      int choose_pic;
-//      for (int i = 0; i < 4; i++)
-//      {
-//        if (pic_counter[indices.at(i)] > pic_counter[indices.at(i + 1)])
-//        {
-//          pic_counter[indices.at(i)]++;
-//          choose_pic = i + 1;
-//        }
-//        else if (pic_counter[indices.at(i)] == pic_counter[indices.at(i + 1)])
-//        {
-//          pic_counter[indices.at(i)]++;
-//          choose_pic = i;
-//        }
-//      }
+      int pos = std::find( pic_counter.begin(), pic_counter.end(), indices.at(0)) - pic_counter.begin();
+      int tmp = std::find( pic_counter.begin(), pic_counter.end(), indices.at(1)) - pic_counter.begin();
+      if(tmp > pos)
+        pos = tmp;
+      tmp = std::find( pic_counter.begin(), pic_counter.end(), indices.at(2)) - pic_counter.begin();
+      if(tmp > pos)
+          pos = tmp;
+      tmp = std::find( pic_counter.begin(), pic_counter.end(), indices.at(3)) - pic_counter.begin();
+      if(tmp > pos)
+        pos = tmp;
+      tmp = std::find( pic_counter.begin(), pic_counter.end(), indices.at(4)) - pic_counter.begin();
+      if(tmp > pos)
+        pos = tmp;
       
-      matchHistograms(it_patch, mosaic_pieces.at(indices.front()), match);
+      cout << pos << endl;
+      
+      matchHistograms(it_patch, mosaic_pieces.at(pic_counter.at(pos)), match);
+      pic_counter.push_front(pic_counter.at(pos));
+      pic_counter.erase(pic_counter.begin() + pic_counter[pos + 1]);
       rep_vecPatches_matched.push_back(match);
     }
 
