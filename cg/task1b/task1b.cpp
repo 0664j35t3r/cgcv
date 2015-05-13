@@ -49,39 +49,46 @@ float4 sampleTexture(const float2& texCoords, const surface<R8G8B8A8>& texture)
 // access the texture image with
 //    texture(x, y).toFloat4()
 //
-  float x = texCoords.x;
-  float y = texCoords.y;
+  float4 obn, untn;
+  float px = static_cast<float>(texCoords.x * texture.width()) + 0.5;
+  float py = static_cast<float>(texCoords.y * texture.height()) + 0.5;
   
-  int px = (int)(x * texture.width());
-  int py = (int)(y * texture.height());
-    
-  R8G8B8A8 c_11 = texture(px    , py    );
-  R8G8B8A8 c_12 = texture(px + 1, py    );
-  R8G8B8A8 c_21 = texture(px    , py + 1);
-  R8G8B8A8 c_22 = texture(px + 1, py + 1);
+  // clamp
+  float intersec = std::abs(texCoords.x * static_cast<float>(texture.width()) - static_cast<float>(px));
+  if((px + 1) <= texture.width())
+  {
+    obn =  intersec * texture(px    , py    ).toFloat4() + 
+     (1 - intersec) * texture(px + 1, py    ).toFloat4();
+  }
+  else
+  {
+    obn =  intersec * texture(px    , py    ).toFloat4() + 
+     (1 - intersec) * texture(px    , py    ).toFloat4();
+  }
   
-  float intersec = x * (float)texture.width() - (float)px;
+  if(px + 1 <= texture.width() && py + 1 <= texture.height())
+  {
+    untn = intersec * texture(px    , py + 1).toFloat4() +
+     (1 - intersec) * texture(px + 1, py + 1).toFloat4();
+  }
+  else if(px + 1 > texture.width())
+  {
+    untn = intersec * texture(px    , py + 1).toFloat4() +
+     (1 - intersec) * texture(px    , py + 1).toFloat4();
+  }
+  else if(py + 1 > texture.height())
+  {
+    untn = intersec * texture(px    , py    ).toFloat4() +
+     (1 - intersec) * texture(px + 1, py    ).toFloat4();
+  }
+  else
+  {
+    untn = intersec * texture(px    , py    ).toFloat4() +
+     (1 - intersec) * texture(px    , py    ).toFloat4();
+  }
   
-  R8G8B8A8 obn = R8G8B8A8( intersec * c_11.r() + (1 - intersec) * c_12.r(),
-                           intersec * c_11.g() + (1 - intersec) * c_12.g(),
-                           intersec * c_11.b() + (1 - intersec) * c_12.b(),
-                           intersec * c_11.a() + (1 - intersec) * c_12.a() ); 
-  
-
-  R8G8B8A8 untn = R8G8B8A8( intersec * c_21.r() + (1 - intersec) * c_22.r(),
-                            intersec * c_21.g() + (1 - intersec) * c_22.g(),
-                            intersec * c_21.b() + (1 - intersec) * c_22.b(),
-                            intersec * c_21.a() + (1 - intersec) * c_22.a() );
-
-  
-  intersec = y * (float)texture.height() - (float)py;
-  
-  R8G8B8A8 interpolated = R8G8B8A8( intersec * obn.r() + (1 - intersec) * untn.r(),
-                                    intersec * obn.g() + (1 - intersec) * untn.g(),
-                                    intersec * obn.b() + (1 - intersec) * untn.b(),
-                                    intersec * obn.a() + (1 - intersec) * untn.a() ); 
-  
-  return interpolated.toFloat4();
+  intersec = std::abs(texCoords.y * static_cast<float>(texture.height()) - static_cast<float>(py));
+  return (intersec * obn + (1 - intersec) * untn);
 }
 
 float3 phong(const float3& p, const float3& n, const float3& v, const float3& k_d, const float3& k_s, float shininess, const float3& lightPos, const float3& lightColor)
@@ -91,25 +98,21 @@ float3 phong(const float3& p, const float3& n, const float3& v, const float3& k_
 // document to determine the illumination of the given surface point
 // with the given material parameters by the given lightsource.
 //
-  // calculate the angle theta
+  
   // calculate c_d
   // https://www.ltcconline.net/greenl/courses/107/vectors/dotcros.htm  
   float3 vector_l = normalize(static_cast<float3>(lightPos - p));
-  float3 norm = normalize(n);
   float theta = dot(n, vector_l);
-  
   float3 c_d = k_d * MAX(theta, 0);
   
   // calculate c_s
   //                                  r = 2n(n l)  - l , 3. foliensatz s54
-  float3 r = float3(2 * norm * cross(norm, vector_l) - vector_l);
-  //  float alpha = dot(normalize(v_norm), normalize(vector_r));
+  float3 r = float3(2 * n * dot(n, vector_l) - vector_l);
   float alpha = dot(normalize(v), normalize(r));
-  
-  float3 c_s(0,0,0);
+  float3 c_s(.0f, .0f, .0f);
   if(theta)
     c_s = k_s * pow(MAX(alpha, 0), shininess);
-    
+  
   return (c_s + c_d) * lightColor;
 }
 
@@ -128,7 +131,6 @@ bool inShadow(const float3& p, const float3& lightPos, const Scene1b& scene)
   Ray ray(p, lightPos - p);
   float t;
   return scene.intersectWithRay(intersectedTriangle, t, ray);
-//  return false;
 }
 
 float3 shade(const Scene1b& scene, const float3& p, const float3& n, const float3& v, 
@@ -145,12 +147,10 @@ float3 shade(const Scene1b& scene, const float3& p, const float3& n, const float
 //    std::isinf(shininess)
 //
   // float3 phong(const float3& p, const float3& n, const float3& v, const float3& k_d, const float3& k_s, float shininess, const float3& lightPos, const float3& lightColor)
-  float3 result(0,0,0);
+  float3 result(.0f, .0f, .0f);
 
   if(std::isinf(shininess))
-  {
     return float3(1.0f ,1.0f ,1.0f);
-  }
   
   for(auto& light : scene.getLightList())
   {
@@ -195,11 +195,11 @@ float3 traceRay(const Scene1b& scene, const Ray& ray, int bounce, int max_bounce
   float3 n;
   float2 texCoords;
   
-  bool intersect = scene.intersectWithRay(triangle, t, ray, barycentric);
-  if (!intersect)
+  if (!scene.intersectWithRay(triangle, t, ray, barycentric))
     return scene.background();
   
   computeSurfaceParameters(triangle, barycentric, n, texCoords);
+  
   PhongMaterial material = scene.materialParameters(triangle->materialIndex, texCoords);
   
   return shade(scene, ray.origin + ray.direction * t + triangle->triangleNormal * epsilon, 
